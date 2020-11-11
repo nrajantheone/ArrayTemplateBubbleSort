@@ -5,13 +5,13 @@ const int OUT_OF_BOUNDS = 2354978;
 #include <stdio.h>
 
 template<class T>
-class array{
+class Array{
   public:
-  array() : _store(NULL), _size(0){
+  Array() : _store(NULL), _size(0){
     _store = new T[ARRAYSIZE];
     _capacity = ARRAYSIZE;
   }
-  ~array() {
+  ~Array() {
     if(_store != NULL) {
       delete [] _store;
       _store = NULL;
@@ -21,7 +21,7 @@ class array{
     return _size;
   }
   const T& operator[](const int i) const {
-    return ( const_cast <array<T>*> (this) )->item(i);
+    return ( const_cast <Array<T>*> (this) )->item(i);
   }
 
   T& operator[](const int i) {
@@ -58,8 +58,9 @@ class array{
 
   const int push_back(const T& item) {
     if(_capacity > _size) {
+      int   length = (int)_size;
       _store[_size++] = item;
-      return _size - 1;
+      return length;
     }
     return _reAllocatePushBack(item);
   }

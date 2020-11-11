@@ -13,6 +13,9 @@ public:
   BubbleSort(){
     //cout << "bs" << endl;
   }
+  ~BubbleSort() {
+        
+  }
 
   ostream& operator<<(ostream& out) {
     out << output();
@@ -70,13 +73,20 @@ public:
 
 private:
 
-  void copyNumbers(const array<int> numbers) {
+  void copyNumbers(const Array<int>& numbers) {
     //cout << "copyNumbers" << endl;
-    for(int i = 0; i < numbers.size(); i++) {
-      //printf("i: %d\tn: %d\n", i, numbers[i]);
-      _numbers.push_back(numbers[i]);
-    }
+      int n = copySomeNumbers(numbers);
   }
+    
+    int copySomeNumbers(const Array<int>& numbers) {
+        unsigned long n = _numbers.size() < numbers.size()? _numbers.size() : numbers.size();
+        for(int i = 0; i < n; i++)
+          _numbers[i] = numbers[i];
+        return (int)n;
+    }
+    
+    void pushSomeNumbers(const Array<int>& numbers) {
+    }
   
   void swap(int i){
     int a = _numbers[i+1];
@@ -100,6 +110,6 @@ private:
     while((n = moveBiggestToEnd()) > 0);
   }
   private:
-  array<int> _numbers;
+  Array<int> _numbers;
 };
 #endif //__bubblesort__

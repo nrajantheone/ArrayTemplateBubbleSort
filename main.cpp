@@ -18,7 +18,7 @@ ostream& operator<<(ostream& os, BubbleSort& b){
 }
 
 int main() {
-  array<BubbleSort> abs;
+  Array<BubbleSort> abs;
   BubbleSort bs;
   cout << "Enter Numbers: " << endl;
   cin >> bs;
