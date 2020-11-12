@@ -49,16 +49,24 @@ public:
     string num;
     for(int a = 0; a < _numbers.size(); a++){
       sprintf(buffer, "%d ", _numbers[a]);
-      printf("%s", buffer);
+    //printf("%s", buffer);
       out += buffer;
     }
     return out;
   }
 
+  bool isValid() const {
+    return !_numbers.empty();
+  }
+
+  void clear() {
+    _numbers.clear();
+  }
+
   int setNumbers(const char* arr){
     int n = 0;
     int no = 0;
-    cout << arr << endl;
+    //cout << arr << endl;
     const char* p = skipSpaces(arr);
     for(;p != NULL && sscanf(p, "%d", &no) > 0; n++, p = nextNumber(p)){
       _numbers.push_back(no);                       
@@ -76,6 +84,9 @@ private:
   void copyNumbers(const Array<int>& numbers) {
     //cout << "copyNumbers" << endl;
       int n = copySomeNumbers(numbers);
+      if(n < _numbers.size()) {
+        pushSomeNumbers(numbers, n);
+      }
   }
     
     int copySomeNumbers(const Array<int>& numbers) {
@@ -85,7 +96,10 @@ private:
         return (int)n;
     }
     
-    void pushSomeNumbers(const Array<int>& numbers) {
+    void pushSomeNumbers(const Array<int>& numbers, const int index) {
+      for(int i = index; i < _numbers.size(); i++) {
+        _numbers.push_back(_numbers[i]);
+      }
     }
   
   void swap(int i){
@@ -113,3 +127,4 @@ private:
   Array<int> _numbers;
 };
 #endif //__bubblesort__
+Fis

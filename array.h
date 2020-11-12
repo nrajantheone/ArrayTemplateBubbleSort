@@ -17,6 +17,11 @@ class Array{
       _store = NULL;
     }
   }
+
+bool empty() const{
+  return _size == 0 || _store == NULL;
+}
+
   unsigned long size() const {
     return _size;
   }
