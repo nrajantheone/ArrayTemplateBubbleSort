@@ -53,6 +53,11 @@ bool empty() const{
     return false;
   }
 
+  void clear() {
+    int i = size();
+    while(remove(--i));
+  }
+
   bool remove(const int index) {
     if(_size >= 0 && _store != NULL && index >= 0 && index <= _size) {
       moveItemsDown(index);
