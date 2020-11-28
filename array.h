@@ -7,6 +7,7 @@ const int OUT_OF_BOUNDS = 2354978;
 template<class T>
 class Array{
   public:
+
   Array() : _store(NULL), _size(0){
     _store = new T[ARRAYSIZE];
     _capacity = ARRAYSIZE;
@@ -55,12 +56,13 @@ bool empty() const{
 
   void clear() {
     int i = size();
-    while(remove(--i));
+    while(remove(--i))printf("i = %d\n", i);
   }
 
   bool remove(const int index) {
-    if(_size >= 0 && _store != NULL && index >= 0 && index <= _size) {
+    if(_size > 0 && _store != NULL && index >= 0 && index <= _size) {
       moveItemsDown(index);
+      _size--;
       return true;
     }
     return false;
@@ -76,10 +78,49 @@ bool empty() const{
   }
 
   protected:
+  
+  static void swapElement(T& a, T& b) {
+    T temp = a;
+    a = b;
+    b = temp;
+  }
+
+  public: 
+    int swap(Array<T>& rhs) {
+    int i = 0;
+    if(_size <= rhs._size)
+      return rhs.swap(*this);
+    for(;i < rhs._size; i++) {
+      swapElement(item(i), rhs[i]);
+    }
+    for(; i < _size; i++) {
+      rhs.push_back(item(i));
+      remove(i);
+    }
+    return _size;
+  } 
+  protected:
+
+
+  //friend char* X::foo(int);
+  //lets other classe X use this funct
+
+  /*void swap(arr) {
+    int temp, i;
+    for(i = 0; i < arr.length; i++) {
+      if(arr[i] > arr[i+1]) {
+        temp = arr[i+1];
+        arr[i+1] = arr[i];
+        arr[i] = temp;
+      }
+    }
+    return arr;
+  }*/
+
   void moveItemsDown(const int i){
     int cs = _size;
-    for(int j = i; j < cs - 1; j++) {
-      (*this)[j-1] = (*this)[j];
+    for(int c = i; c < cs - 1; c++) {
+      (*this)[c-1] = (*this)[c];
     }
   }
 
@@ -134,5 +175,10 @@ bool empty() const{
     unsigned long _capacity;
     unsigned long _size;
 };
+
+template<typename T>
+void swap(Array<T>& left, Array<T>& right) {
+  left.swap(right);
+}
 
 #endif //__Array_h__

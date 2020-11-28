@@ -43,6 +43,11 @@ public:
     return NULL;
   }
 public:
+
+  int swap(Array<int>& num) {
+    return _numbers.swap(num);
+  }
+
   string output() const {
     char buffer[BUFFER_SIZE] = {'\0'};
     string out("Sorted Output: ");

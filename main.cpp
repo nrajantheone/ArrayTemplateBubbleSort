@@ -17,25 +17,31 @@ ostream& operator<<(ostream& os, BubbleSort& b){
   return os;
 }
 
-
-
 bool inputNumbers(BubbleSort& bs) {
   cout << "Enter Numbers: " << endl;
   cin >> bs;
   return bs.isValid();
 }
 
+bool inputNumbers(Array<int>& num) {
+  return num.size() > 0;
+}
+
 int main() {
   Array<BubbleSort> abs;
+  Array<int> arr;
   BubbleSort bs;
   while(inputNumbers(bs)) {
     bs.sort();
     abs.push_back(bs);
     cout << bs;
     bs.clear();
+    inputNumbers(arr);
+    bs.swap(arr);
+    bs.clear();
   }
 }
 
-//hw: Use remove to remove all items. 
 
-//Comment out line 26 and put a while statement around lines 21-27 to sort as long as the user enters numbers.
+
+//hw: implement input numbers
